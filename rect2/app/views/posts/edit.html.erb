@@ -1,0 +1,7 @@
+<% provide(:title, @course.name.to_s + " | Forum ") %>
+<h1>Editing Post</h1>
+<% @url = course_post_path(:id => @post.id) %>
+<%= render 'form', post: @post %>
+
+<%= link_to 'Show', course_post_path(:id => @post.id) %> |
+<%= link_to 'Back', course_post_path %>

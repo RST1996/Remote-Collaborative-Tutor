@@ -1,0 +1,10 @@
+<%
+	#set_course
+    req = Request.find(params[:req_id])
+    req.destroy
+    flash[:alert] = 'Request denied !!.';
+    #redirect_to manage_tutor_course_path 
+%>
+	<script type="text/javascript">
+		window.location.href="<%= manage_tutor_course_path %>"	
+	</script>

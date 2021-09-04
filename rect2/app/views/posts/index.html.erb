@@ -1,0 +1,51 @@
+<% provide(:title, @course.name.to_s + " | Forum") %>
+<p id="notice"><%= notice %></p>
+<h1><%= @course.name%> Forum Posts</h1>
+<div id="posts">
+<% if @posts.size > 0%>
+  <% @posts.each do |post| %>
+    <div class="post">
+      <h2 class="title">
+        <%= link_to post.title, course_post_path(:id => post.id) %>
+      </h2>
+      <p>
+        <%= post.body %>
+      </p>
+      <p class="date">
+        Published at
+        <%= time_ago_in_words(post.created_at) %>
+        by
+        <%= post.user.name %>
+      </p>
+    </div>
+    <hr/>  
+  <% end %>
+  <!-- <table class="table table-stripped table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Body</th>
+        <th>User</th>
+        <th>View</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%# @posts.each do |post| %>
+        <tr>
+          <td><%#= post.title %></td>
+          <td><%#= post.body %></td>
+          <td><%#= post.user.name %></td>
+          <td><%#= link_to 'Show', course_post_path(:id => post.id) %></td>
+          
+        </tr>
+      <%# end %>
+    </tbody>
+  </table> -->
+<% else %>
+  <div class="alert alert-info" role="alert">
+      <strong>Opps!</strong> Not a single post yet!!.
+    </div>
+<% end %>
+  <%= link_to 'New Post', new_course_post_path, class: "btn btn-primary" %>
+</div>  

@@ -1,0 +1,13 @@
+<%
+	@tutor = Tutor.new(:course_id=>@course.id, :user_id=>params[:user_id])
+    if @tutor.save
+      req = Request.find(params[:req_id])
+      req.destroy 
+      flash[:notice] = 'Tutor added Successfully!!' 
+   else
+    	flash[:alert] = 'Failed to add tutor'
+   end 
+%>
+<script type="text/javascript">
+	window.location.href="<%= manage_tutor_course_path %>"	
+</script>

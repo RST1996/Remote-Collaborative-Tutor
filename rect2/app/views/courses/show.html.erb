@@ -1,0 +1,84 @@
+<% provide(:title, @course.name.to_s + " | Course") %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @course.user.name %>
+</p>
+<% if @course.user == current_user%>
+	<%= link_to 'Edit', edit_course_path(@course) %> |
+	<%= link_to 'Back', courses_path %>
+<% end %>
+
+<h3>Course Contents</h3>
+<% @content = @course.contents %>
+<% if @content.size > 0%>
+	<table class="table table-stripped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Size</th>
+				<th>Download Link</th>
+				<% if @course.user == current_user%>
+					<th colspan="2">Action</th>
+				<% end %>			  
+			</tr>
+		</thead>
+		<tbody>
+			<%@content.each do |content|%>
+				<tr>
+					<td><%= content.name%></td>
+					<td><%= content.content_type%></td>
+					<td><%= number_to_human_size(content.size)%></td>
+					<td><%= link_to 'Download', content.attachment_url.to_s,  class: 'btn btn-primary' %></td>
+					<% if @course.user == current_user%>
+						<th><%= link_to 'Edit', edit_course_content_path(:id => content.id, :course_id => @course.id),  class: 'btn btn-primary'%></th>
+						<th><%= link_to 'Destroy', course_content_path(:id => content.id, :course_id => @course.id), method: :delete, data: { confirm: 'Are you sure?' },  class: 'btn btn-danger' %></th>
+					<% end %>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+<% else %>
+	<% if @course.user == current_user%>
+		<div class="alert alert-info" role="alert">
+			<strong>Ohh!</strong> No content has been added yet. Plzz add some content soon.
+		</div>
+	<% else %>
+		<div class="alert alert-info" role="alert">
+			<strong>Oops!</strong> No content available for this course.
+		</div>
+	<% end %>
+<% end %>
+<% if @course.user == current_user%>
+	<%= link_to "Add Content", new_course_content_path(:course_id => @course.id) , class: "btn btn-primary" %>
+	<%= link_to "Manage ", manage_tutor_course_path , class: "btn btn-primary" %>
+
+<% end %>
+	<%= link_to "Move to Forum ",  course_posts_path(:course_id => @course.id) , class: "btn btn-primary" %>
+	<%= link_to "Communicate",  communicate_course_path , class: "btn btn-primary" %>
+
+<br/><br/>
+<% if @course.requests.where(:user_id => current_user.id).count == 1 %>
+	<div class="alert alert-info" role="alert">
+		You have applied for tutor.
+	</div>
+	
+<% elsif @course.tutors.where(:user_id => current_user.id).count == 1 %>
+	<div class="alert alert-info" role="alert">
+		Wow!! you are a tutor
+	</div>
+<% else %>
+	<%= link_to 'Apply to become a Tutor',  apply_for_tutor_course_path(@course),  class: 'btn btn-primary' %>
+<% end %>

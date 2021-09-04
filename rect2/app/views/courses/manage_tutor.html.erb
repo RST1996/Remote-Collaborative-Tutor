@@ -1,0 +1,28 @@
+<% provide(:title, @course.name.to_s + " | Manage Tutor") %>
+<% @tutor_request = @course.requests %>
+
+<div>
+	<h1>Pending Tutor Request</h1>
+	<table class="table table-bordered table-stripped">
+		<thead>
+			<th>User</th>
+			<th colspan="2">Action</th>
+		</thead>
+		<tbody>
+			<% if @tutor_request.count > 0	%>
+			
+				<% @tutor_request.each do |req| %>
+					<tr>
+						<td><%= req.user.name  %></td>
+						<td><%= link_to 'Accept',  assign_tutor_course_path(req.course,:req_id=>req.id,:user_id => req.user.id),  class: 'btn btn-primary' %></td>
+						<td><%= link_to 'Decline',   remove_request_course_path(req.course,:req_id=>req.id),  class: 'btn btn-danger' %></td>
+					</tr>
+				<% end %>
+			<% else %>
+				<tr>
+					<td colspan="3"> No pending requests !!</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

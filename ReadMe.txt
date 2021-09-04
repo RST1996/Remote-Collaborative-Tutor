@@ -1,7 +1,3 @@
-# Remote Collaborative Tutor
- A online learning platform which sopports three entites of the learning paradigm, viz., students, teachers and tutors.
-
-
 ReCT: Remote Collaborative Tutor
 The source code folder contains 2 subfoler
 1.rect

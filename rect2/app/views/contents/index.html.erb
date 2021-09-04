@@ -1,0 +1,44 @@
+<% provide(:title, @course.name.to_s + " | Course Contents") %>
+<h1><%= @course.name%> Contents</h1>
+<% if @content.size > 0%>
+	<table class="table table-stripped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Size</th>
+				<th>Download Link</th>
+				<% if @course.user == current_user%>
+					<th colspan="2">Action</th>
+				<% end %>			  
+			</tr>
+		</thead>
+		<tbody>
+			<%@content.each do |content|%>
+				<tr>
+					<td><%= content.name%></td>
+					<td><%= content.content_type%></td>
+					<td><%= number_to_human_size(content.size)%></td>
+					<td><%= link_to 'Download', content.attachment_url.to_s,  class: 'btn btn-primary' %></td>
+					<% if @course.user == current_user%>
+						<th><%= link_to 'Edit', edit_course_content_path(:id => content.id),  class: 'btn btn-primary'%></th>
+						<th><%= link_to 'Destroy', course_content_path(:id => content.id), method: :delete, data: { confirm: 'Are you sure?' },  class: 'btn btn-danger' %></th>
+					<% end %>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+<% else %>
+	<% if @course.user == current_user%>
+		<div class="alert alert-info" role="alert">
+			<strong>Ohh!</strong> No content has been added yet. Plzz add some content soon.
+		</div>
+	<% else %>
+		<div class="alert alert-info" role="alert">
+			<strong>Oops!</strong> No content available for this course.
+		</div>
+	<% end %>
+<% end %>
+<% if @course.user == current_user%>
+	<%= link_to "Add Content", new_course_content_path , class: "btn btn-primary" %>
+<% end %>

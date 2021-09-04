@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<hr />
+<table class="table">
+  <thead></thead>
+  <tbody>
+    <% @comments.each do |cmnt| %>
+      <% if cmnt.id? %>
+      <tr>
+        <td style="border: none;" colspan="2"><%= cmnt.msg %></td>
+      </tr>
+      <tr>
+        <td style="border: none;"> By: <%= cmnt.user.name %></td>
+        <td style="border: none;">
+          <% if cmnt.user.id == current_user.id%>
+            <%= link_to 'Destroy', course_post_comment_path(:post_id => cmnt.post.id, :id => cmnt ),  class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?'} %>
+          <%end%>
+        </td>         
+      </tr>
+      <tr> <td style="border: none;" colspan="2"><hr/></td></tr>
+
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

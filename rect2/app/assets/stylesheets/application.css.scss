@@ -1,0 +1,101 @@
+ @import 'normalize';
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import 'card';
+
+
+html, body {
+	font-family: 'Raleway', sans-serif;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 500;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+/*Flash*/
+
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+ ul {
+  padding-left: 0px;
+  list-style: none;
+}
+.messages-list {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.message-sent {
+  position: relative;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  margin: 5px 20px;
+  padding: 10px;
+  float: right;
+}
+
+
+.message-received {
+  background-color: #F1F0F0;
+  border-color: #EEEEEE;
+  margin: 5px 20px;
+  padding: 10px;
+  float: left;
+}
+
+#posts {
+  background: white;
+  padding: 2em 5%;
+  border-radius: .5em;
+  .post {
+    margin: 1em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid #D1d1d1;
+    .title {
+      margin: 0;
+      a {
+        color: #397CAC;
+        text-decoration: none;
+        font-weight: 100;
+        font-size: 1.25rem;
+      }
+    }
+    .date {
+      margin-top: .25rem;
+      font-size: 0.9rem;
+      color: #B2BAC2;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<% provide(:title, @course.name.to_s + " | Forum") %>
+<h1>New Post</h1>
+<% @url = course_posts_path %>
+<div class="col-md-8">
+	<%= render 'form', post: @post %>
+</div>
+<div class="row"></div>
+<div class="clearfix"></div>
+<br/>
+<%= link_to 'Back', course_posts_path %>

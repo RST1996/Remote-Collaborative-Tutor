@@ -1,0 +1,68 @@
+<% provide(:title, "VDL") %>
+<div class="center">
+	<h3 align="center" style="text-decoration: underline;">ReCT: Virtual Debugging Laboratory</h3>
+</div>
+<div class="row cspace">
+		<div class="col-sm-8">
+			<div class="form-group">
+				<form action="/pages/compiler" id="form" name="f2" method="POST" >
+					<label for="lang">Choose Language</label>
+
+					<select class="form-control" name="language">
+						<option value="c">C</option>
+						<option value="cpp">C++</option>
+						<option value="java">Java</option>
+						<option value="python3">Python3</option>
+					</select><br><br>
+
+					<label for="ta">Write Your Code</label>
+					<textarea class="form-control" name="code" rows="10" cols="50"></textarea><br><br>
+					<label for="in">Enter Your Input</label>
+					<textarea class="form-control" name="input" rows="10" cols="50"></textarea><br><br>
+					<input type="submit" id="st" class="btn btn-success" value="Run Code"><br><br><br>
+
+
+				</form>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#st").click(function(){
+							$("#div").html("Loading ......");
+						});
+					});
+				</script>
+
+				<script>
+				//wait for page load to initialize script
+				$(document).ready(function(){  
+				    $('form').on('submit', function(e){
+				      //prevent form from submitting and leaving page
+				      e.preventDefault();
+				      //POST Method to get the results
+				      var dataToSend = $('form').serialize();
+				      //AJAX CORS
+				      	$.ajax({
+						    type: "POST",
+						    //headers: {"X-My-Custom-Header": "some value"},
+						    url: "http://localhost/vdl/compilerect.php",
+						    data: dataToSend
+						}).done(function (data) {
+						    console.log(data);
+						    //alert(data['results']);
+						    $('#div').html(data['results'])
+						});
+
+				    });
+				});
+				</script> 
+
+				<label for="out">Output</label>
+				<textarea id='div' class="form-control" name="output" rows="10" cols="50"></textarea><br><br>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+
+  
+		</div>
+	</div>

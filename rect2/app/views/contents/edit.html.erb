@@ -1,0 +1,7 @@
+<% provide(:title, @course.name.to_s + " | Course contents") %>
+<h1>Editing Content</h1>
+<% @url = course_content_path(:id => @content.id) %>
+<%= render 'form', content: @content %>
+
+
+<%= link_to 'Back', course_contents_path %>
